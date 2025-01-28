@@ -1,0 +1,268 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header{
+    height: 40px;
+    width: 100%;
+    background-color: beige;
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.v_logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    font-size: 40px;
+    z-index: 2;
+}
+
+#logo{
+    left: 0px;
+    position: absolute;
+    background-color: black;
+    height: 100%;
+    width: 100px;
+    font-size: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#vanguard{
+    font-size: 13px;
+    height: 12px;
+}
+
+.buttons{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.top{
+    height: 400px;
+    margin-top: 70px;
+    width:80%;
+    max-width: 1300px;
+    min-height: 250px;
+    background-color: rgb(243, 235, 219);
+    position: relative;
+}
+@media screen and (min-width:1000px){
+    .top{
+        width: 60%;
+    }
+}
+.top_img{
+    position: absolute;
+    right: 0;
+    overflow:hidden ;
+    height: 100%;
+    width: 50%;
+    background-color: black;
+}
+.top_img_img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.right_wrapper{
+    position: absolute;
+    left:0px;
+    top:0px;
+    width: 50%;
+    height: 100%;
+}
+.right{
+    height: 100%;
+    width: 50%;
+    padding-left: 10%;
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (max-width:750px){
+    .right{
+        padding-left: 20%;
+    }
+}
+.note{
+    padding-top: 30%;
+    opacity: 80%;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+@media screen and (min-width:1000px){
+    .note{
+        padding-top: 20%;
+    }
+}
+
+@media screen and (max-width:750px){
+    .note{
+        padding-top: 50%;
+    }
+}
+
+.continue_reading{
+    width: 120px;
+    font-weight: 400;
+    border-bottom: 2px solid #000;
+}
+
+.content_title_wrapper{
+    height: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.content_title{
+    
+    font-size: 30px;
+    font-weight: bold;
+}
+
+@media screen and (max-width:750px){
+    .content_title{
+        font-size: 20px;
+    }
+}
+.content_mini{
+    margin-bottom: 5%;
+    opacity: 80%;
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+}
+
+@media screen and (max-width:750px){
+    .content_mini{
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+    }
+}
+.tops_bottom_color{
+    top: 300px;
+    z-index: -1;
+    position: absolute;
+    height: 250px;
+    width: 100%;
+    background-color: aquamarine;
+}
+
+.content{
+    padding: 30px;
+    box-sizing: border-box;
+    width:80%;
+    max-width: 1300px;
+    min-height: 250px;
+}
+
+@media screen and (min-width:1000px){
+    .content{
+        width: 60%;
+    }
+}
+
+.content_title{
+    margin-top:3%;
+    font-size: large;
+    max-width: 70%;
+    margin-bottom: 6%;
+}
+
+.content_text{
+    max-width: 90%;
+    margin-top: 3%;
+}
+
+#note_content{
+    padding-top: 15%;
+}
+
+.bordered_text{
+    margin-left: 5%;
+    padding-left: 5%;
+    border-left: 1px solid black;
+    max-width: 70%;
+    margin-top: 6%;
+}
+#facebook{
+    font-weight: bolder;
+    font-size: 20px;
+    margin-right: 9px;
+}
+#share_a{
+    margin-left: 3px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    text-decoration: none;
+    color: #000;
+}
+.share{
+    padding-top: 0px;
+}
+
+footer{
+    background-color: wheat;
+    height: 150px;
+    width: 100%;
+}
+
+.read_more{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0px;
+    top: 41%;
+    width: 20%;
+    height: 30%;
+}
+
+@media screen and (min-width:1000px){
+    .read_more{
+        height: 40%;
+    }
+}
+
+@media screen and (min-width:1300px){
+    .read_more{
+        height: 60%;
+    }
+}
+
+.read_more_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #000;
+    color: white;
+}
+.read_more_segment{
+    padding: 10px;
+    border: 1px solid black;
+}
