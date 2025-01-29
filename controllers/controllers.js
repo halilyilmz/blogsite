@@ -1,8 +1,5 @@
 import { db } from "../models/index.js";
 import fs from 'fs';
-import { createCanvas } from "canvas";
-
-import { loadImage } from "canvas";
 
 
 export const addcontent = async (req, res) => {
@@ -22,7 +19,7 @@ export const addcontent = async (req, res) => {
         const oldPath = req.file.path; // Yüklenen dosyanın geçici yolu
         const extension = req.file.originalname.split(".").pop(); // Dosya uzantısını al (jpg, png, vb)
 
-        if(extension !="PNG"&& extension != "JPEG"){
+        if(extension !="PNG"&& extension != "JPEG"&& extension!="png"&&extension!="jpeg"){
                 return res.status(400).json("only jpeg and png supported")
             }
 
@@ -40,10 +37,8 @@ export const addcontent = async (req, res) => {
 
         // Yüklenen dosya varsa, dosyayı kaydet ve yolunu veritabanına ekle
         if (req.file) {
-            
 
-
-            const newPath = `./resimler/${contentId}.${extension}`; // content_id ile dosya adını oluştur
+            const newPath = `../public/images/${Date.now()}.${extension}`; // content_id ile dosya adını oluştur
 
             // Dosya adını değiştir (eski yolu yeni yola kopyala)
             fs.renameSync(oldPath, newPath);
@@ -113,7 +108,6 @@ export const update = async (req, res) => {
     try {
 
         console.log(req.body)
-        /*
         // İçerik için tag belirleme
         let tagforadding;
 
@@ -142,35 +136,7 @@ export const update = async (req, res) => {
             { where: { content_id: contentId } }
         )
 
-        
-        if (req.file) {
-            const directory = '../resimler'
 
-            fs.readdir(directory, (err, files) => {
-                files.forEach(file => {
-                    if(file.split('.')[0] == `${contentId}`) fs.unlink( directory + file );       
-                });
-            });
-
-            const oldPath = req.file.path; // Yüklenen dosyanın geçici yolu
-            const extension = req.file.originalname.split(".").pop(); // Dosya uzantısını al (jpg, png, vb)
-
-            if(extension !="PNG"&& extension != "JPEG"){
-                    return res.status(400).json("only jpeg and png supported")
-            }
-
-            const newPath = `./resimler/${contentId}.${extension}`; // content_id ile dosya adını oluştur
-
-            // Dosya adını değiştir (eski yolu yeni yola kopyala)
-            fs.renameSync(oldPath, newPath);
-
-            // Veritabanındaki içeriğe resmin yolunu kaydet
-            await db.content.update(
-                { image_path: newPath }, // Resim yolunu güncelle
-                { where: { content_id: contentId } } // İlgili content_id'yi bul ve güncelle
-            );
-        }
-*/
         return res.status(200).json({ message: "Başarılı!" });
     } catch (err) {
         console.log(err);
@@ -194,4 +160,22 @@ export const last4content=async (req,res) => {
     }
   };
 
+
+  export const getmaxpage = async (req, res) => {
+    try {
+      
+      const content = await db.content.findOne({
+        order: [['content_id', 'DESC']]
+      });
+
+
+      const maxcontent = content.content_id;
+      const maxpage = Math.ceil(maxcontent / 4); 
+  
+      res.status(200).json({ maxpage });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'An error occurred' });
+    }
+  };
   
