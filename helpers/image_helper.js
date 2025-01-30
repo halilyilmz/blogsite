@@ -4,7 +4,7 @@ import fs from "fs";
 // Storage ayarları
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadPath = "./resimler";
+        const uploadPath = "./public/images";
         if (!fs.existsSync(uploadPath)) {
             fs.mkdirSync(uploadPath); // Eğer klasör yoksa oluştur
         }

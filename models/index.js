@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import { tagModule } from "./tagModule.js";
 import { contentModule } from "./contentModule.js";
-import { Database } from "../confic.js";
+import { Database } from "../config.js";
 
 const database = new Sequelize(
     Database.SCHEMANAME,
