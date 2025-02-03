@@ -1,4 +1,4 @@
-import { db } from "../models/index.js";
+import  db  from "../models/index.js";
 import fs from 'fs';
 
 
@@ -16,7 +16,7 @@ export const addcontent = async (req, res) => {
             tagforadding = 3;
         }
 
-        const oldPath = req.file.path; // Yüklenen dosyanın geçici yolu
+        const filePath = req.file.path; // Yüklenen dosyanın geçici yolu
         const extension = req.file.originalname.split(".").pop(); // Dosya uzantısını al (jpg, png, vb)
 
         if(extension !="PNG"&& extension != "JPEG"&& extension!="png"&&extension!="jpeg"){
@@ -31,24 +31,10 @@ export const addcontent = async (req, res) => {
             title: req.body.title,
             content_inside_title: req.body.content_inside_title,
             tag_id: tagforadding,
+            image_path:filePath
         });
 
         const contentId = newContent.content_id; // Yeni content_id veritabanından al
-
-        // Yüklenen dosya varsa, dosyayı kaydet ve yolunu veritabanına ekle
-        if (req.file) {
-
-            const newPath = `../public/images/${Date.now()}.${extension}`; // content_id ile dosya adını oluştur
-
-            // Dosya adını değiştir (eski yolu yeni yola kopyala)
-            fs.renameSync(oldPath, newPath);
-
-            // Veritabanındaki içeriğe resmin yolunu kaydet
-            await db.content.update(
-                { image_path: newPath }, // Resim yolunu güncelle
-                { where: { content_id: contentId } } // İlgili content_id'yi bul ve güncelle
-            );
-        }
 
         res.status(200).json({ message: "Başarılı!", content_id: contentId });
     } catch (err) {
@@ -178,4 +164,3 @@ export const last4content=async (req,res) => {
       res.status(500).json({ message: 'An error occurred' });
     }
   };
-  

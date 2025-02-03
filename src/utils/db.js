@@ -1,7 +1,18 @@
 import { Sequelize } from "sequelize";
-import { tagModule } from "./tagModule.js";
-import { contentModule } from "./contentModule.js";
-import { database } from "../utils/db.js";
+import { Database } from "../../config.js";
+
+import { tagModule } from "../models/tagModule.js";
+import { contentModule } from "../models/contentModule.js";
+
+const database = new Sequelize(
+    Database.SCHEMANAME,
+    Database.USER,
+    Database.PASSWORD,
+    {
+        dialect: "mysql",
+    }
+);
+
 
 const tag = tagModule(database);
 const content = contentModule(database);
