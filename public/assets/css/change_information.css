@@ -77,3 +77,12 @@
     justify-content: space-between;
     width: 50%;
 }
+.nonbutton{
+    background-color:rgb(237, 237, 237);
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid rgba(49, 49, 49, 0.686) ;
+    border-radius: 1px;
+}

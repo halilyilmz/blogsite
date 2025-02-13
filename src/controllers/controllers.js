@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import  db  from "../models/index.js";
 import fs from 'fs';
 
@@ -23,6 +24,9 @@ export const addcontent = async (req, res) => {
                 return res.status(400).json("only jpeg and png supported")
             }
 
+        let image_path_cropped= filePath.substring(14,filePath.length);
+        image_path_cropped="images/"+image_path_cropped;
+        console.log(image_path_cropped);
 
         // İçeriği veritabanına kaydet
         const newContent = await db.content.create({
@@ -31,7 +35,7 @@ export const addcontent = async (req, res) => {
             title: req.body.title,
             content_inside_title: req.body.content_inside_title,
             tag_id: tagforadding,
-            image_path:filePath
+            image_path:image_path_cropped
         });
 
         const contentId = newContent.content_id; // Yeni content_id veritabanından al
@@ -64,22 +68,6 @@ export const getcontentbyid = async (req, res) => {
             return res.status(404).json({ message: "Content not found" });
         }
 
-        // Görsel yolunu kontrol et ve Base64 formatına çevir
-        if (content.image_path) {
-            try {
-                // Görseli Base64 formatına çevir
-                const imageBuffer = fs.readFileSync(content.image_path); // Dosyayı oku
-                const base64Image = imageBuffer.toString('base64'); // Base64'e çevir
-
-                // Base64 string'i content nesnesine ekle
-                content.dataValues.image = `data:image/${content.image_path.split('.').pop()};base64,${base64Image}`;
-            } catch (err) {
-                console.error('Görsel yüklenemedi:', err);
-                return res.status(500).json({ message: "Image loading failed", error: err.message });
-            }
-        } else {
-            content.dataValues.image = null; // Eğer görsel yoksa null döndür
-        }
 
         // İçeriği döndür
         res.status(200).json(content);
@@ -133,34 +121,89 @@ export const update = async (req, res) => {
 
 
 
-export const last4content=async (req,res) => {
+export const last4contentaccseptfirst=async (req,res) => {
     try {
       const records = await db.content.findAll({
+        offset:1,
         order: [['content_id', 'DESC']], // created_at'ı azalan düzende sırala
         limit: 4, // Son 4 veriyi getir
+        where:{
+            tag_id:1,
+            tag_id:2
+        }
       });
   
       res.status(200).json(records);
     } catch (error) {
-      console.error('Error:', error);
+        res.status(500).json("Content couldn't be founded");
     }
-  };
+ };
+
+
+ export const last4contentbyid=async (req,res) => {
+    try {
+        
+        const id = req.params.id * 4;
+        let offetnum;
+
+        if(id==0){
+            offetnum=0;
+        }else{
+            offetnum=id-1;
+        }
+
+
+        const records = await db.content.findAll({
+            offset: offetnum,
+            limit: 4, // Son 4 veriyi getir
+            order: [['content_id', 'DESC']], // created_at'ı azalan düzende sırala
+        });
+    
+        res.status(200).json(records);
+    } catch (error) {
+        res.status(500).json("Contents couldn't be founded");
+    }
+ };
 
 
   export const getmaxpage = async (req, res) => {
     try {
       
-      const content = await db.content.findOne({
-        order: [['content_id', 'DESC']]
-      });
+      const content = await db.content.count();
+      const maxpage = Math.ceil(content / 4);
 
-
-      const maxcontent = content.content_id;
-      const maxpage = Math.ceil(maxcontent / 4); 
-  
       res.status(200).json({ maxpage });
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'An error occurred' });
     }
   };
+
+  export const lastcontent=async(req,res)=>{
+    try{
+        const content = await db.content.findOne({
+            order:[['content_id', 'DESC']],
+        });
+
+        res.status(200).json({content});
+    }
+    catch{
+        res.status(500).json("an error occured");
+    }
+  }
+
+
+  export const last4mustread= async(req,res)=>{
+    try{
+        const content = await db.content.findAll({
+            order:[['content_id', 'DESC']],
+            limit:4,
+            where:{tag_id:3}
+        });
+
+        res.status(200).json({content});
+    }
+    catch{
+        res.status(500).json("an error occured");
+    }
+  }

@@ -12,7 +12,8 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9); // Benzersiz bir dosya adı
-        cb(null, uniqueSuffix + "-" + file.originalname);
+        let extention=file.originalname.split('.').pop();
+        cb(null, uniqueSuffix +"."+ extention);
     },
 });
 

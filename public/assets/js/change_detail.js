@@ -1,5 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
+const searchParams = new URLSearchParams(window.location.search);
+const id = searchParams.get('id');
+
 
 let imgcurrent = document.getElementById("imgcurrent")
 let imgnext = document.getElementById("imageUpload")
@@ -35,11 +37,11 @@ async function getcontent(id) {
     let content=await fetch(`http://localhost:8000/homepage/contentdetails/${id}`)
 
     content=await content.json();
+    let imglink= "http://localhost:8000/"+content.image_path;
 
-    console.log(content.content_id);
+    console.log( content.content_id);
 
-    imgcurrent.src = content.image;
-    imgcurrent.style.maxHeight="200px";
+    imgcurrent.src = imglink;
 
     setnote.value=content.note;
     setcontent_text.value=content.content_text;
