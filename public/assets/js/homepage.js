@@ -53,7 +53,7 @@ getlastmustread4content().then((data)=>{
 
 
 function settopcontent(data){
-    imgroad="http://localhost:8000/"+data.content.image_path;
+    imgroad="http://localhost:8000/public/"+data.content.image_path;
     topimg.src=imgroad;
     top_note.textContent=data.content_note;
     top_title.textContent=data.content.title;
@@ -61,37 +61,37 @@ function settopcontent(data){
 }
 
 async function getlastmaincontent(){
-    let content = await fetch("http://localhost:8000/homepage/lastcontent")
+    let content = await fetch("http://localhost:8000/lastcontent")
     content=await content.json()
     return content;
 }
 
 async function getlast4contentaccseptfirst(){
-    let records=await fetch("http://localhost:8000/homepage/last4contentaccseptfirst");
+    let records=await fetch("http://localhost:8000/last4contentaccseptfirst");
     records=await records.json()
     return records;
 }
 
 function setmaincontents(data){
-    let imgroad1="http://localhost:8000/"+data[0].image_path;
+    let imgroad1="http://localhost:8000/public/"+data[0].image_path;
     img1.src=imgroad1;
     note1.textContent=data[0].content_text;
     title1.textContent=data[0].title;
     explanation1.textContent=data[0].content_text;
 
-    let imgroad2="http://localhost:8000/"+data[1].image_path;
+    let imgroad2="http://localhost:8000/public/"+data[1].image_path;
     img2.src=imgroad2;
     note2.textContent=data[1].content_text;
     title2.textContent=data[1].title;
     explanation2.textContent=data[1].content_text;
 
-    let imgroad3="http://localhost:8000/"+data[2].image_path;
+    let imgroad3="http://localhost:8000/public/"+data[2].image_path;
     img3.src=imgroad3;
     note3.textContent=data[2].content_text;
     title3.textContent=data[2].title;
     explanation3.textContent=data[2].content_text;
 
-    let imgroad4="http://localhost:8000/"+data[3].image_path;
+    let imgroad4="http://localhost:8000/public/"+data[3].image_path;
     img4.src=imgroad4;
     note4.textContent=data[3].content_text;
     title4.textContent=data[3].title;
@@ -99,7 +99,7 @@ function setmaincontents(data){
 }
 
 async function getlastmustread4content(){
-    let last4mustread=await fetch("http://localhost:8000/homepage/last4mustreadcontent");
+    let last4mustread=await fetch("http://localhost:8000/last4mustreadcontent");
     last4mustread=await last4mustread.json();
     return last4mustread;
 }

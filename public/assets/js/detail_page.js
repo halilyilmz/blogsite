@@ -30,7 +30,7 @@ getrecord(id).then((record)=>{
 
 
 async function getrecord(id){
-    let record=await fetch(` http://localhost:8000/homepage/contentdetails/${id}`)
+    let record=await fetch(` http://localhost:8000/contentdetails/${id}`)
     record=await record.json();
     return record;
 }

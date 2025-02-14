@@ -9,22 +9,24 @@
 
     <img src="" alt="" id="imgcurrent"><br>
 
-    <form action="" method="post" enctype="multipart/form-data" id="form">
+    <form action="http://localhost:8000/admin/addcontent" method="post" enctype="multipart/form-data">
         
+        
+
         <label for="imageUpload">resim seç</label><br> 
         <input type="file" id="imageUpload" name="imageUpload" accept="image/*"><br>
     
         <span>note</span><br>
-        <input type="text" name="note" id="note"><br>
+        <input type="text" name="note"><br>
         
         <span>content</span><br>
         <textarea id="longText" name="content_text" rows="10" cols="50" placeholder=""></textarea><br>
         
         <span>title</span><br>
-        <input id="title" type="text" name="title"><br>
+        <input type="text" name="title"><br>
     
         <span>title inside of content</span><br>
-        <input type="text" id="content_inside_title" name="content_inside_title"><br>
+        <input type="text" name="content_inside_title"><br>
     
         <input type="radio" id="Hair" name="tag" value="Hair">
         <label for="Hair">Hair</label><br>
@@ -34,11 +36,11 @@
     
         <input type="radio" id="must_read" name="tag" value="must_read">
         <label for="must_read">must_read</label><br>
-
+    
         <br>
         <button>gönder</button>
     </form>
 
-    <script src="../../assets/js/change_detail.js"></script>
+    <script src="../../../public/assets/js/add_content.js"></script>
 </body>
 </html>

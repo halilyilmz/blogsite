@@ -34,10 +34,10 @@ imgnext.addEventListener("change", function (e) {
 
 
 async function getcontent(id) {
-    let content=await fetch(`http://localhost:8000/homepage/contentdetails/${id}`)
+    let content=await fetch(`http://localhost:8000/contentdetails/${id}`)
 
     content=await content.json();
-    let imglink= "http://localhost:8000/"+content.image_path;
+    let imglink= "http://localhost:8000/public/"+content.image_path;
 
     console.log( content.content_id);
 

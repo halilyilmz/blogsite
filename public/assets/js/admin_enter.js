@@ -1,3 +1,4 @@
+
 const button=document.querySelector(".button");
 const usernameinput=document.querySelector(".username");
 const passwordinput=document.querySelector(".password");
@@ -14,9 +15,8 @@ button.addEventListener("click",()=>{
             alert("wrong username or password")
         }
         if(token.token){
-            console.log(token);
             settokentolocalstorage(token.token)
-            getchangeinformationpage(token.token)
+            getchangeinformationpage()
         }
 
     });
@@ -34,34 +34,15 @@ async function gettoken(username,password) {
           "Content-type": "application/json; charset=UTF-8"
         }
     });
-    token=token.json();
+    token=await token.json();
 
     return token;
 }
 
 function settokentolocalstorage(token){
     localStorage.setItem("token",JSON.stringify(token));
-    console.log(localStorage.getItem("token"))
 }
  
-async function getchangeinformationpage(token){
-    fetch("http://localhost:8000/admin/changecontents", {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      })
-        .then(response => {
-          if (response.redirected) { 
-            // Tarayıcının yönlendirmesi için
-            window.location.href = response.url;
-          }
-          return response.text(); // Yanıtın içeriğini al
-        })
-        .then(data => {
-          console.log("Gelen veri:", data);
-        })
-        .catch(error => console.error("Hata:", error));
-      
+async function getchangeinformationpage(){
+    window.location.href = "http://localhost:8000/admin/change_information";
 }

@@ -1,10 +1,10 @@
 import{ getcontentbyid,last4contentaccseptfirst,lastcontent,getmaxpage,last4mustread}from "../controllers/controllers.js"
-
+import { index } from "../controllers/homeControllers.js";
 
 import express from "express";
 let general_routers=express.Router();
 
-
+general_routers.get("/",index)
 general_routers.get("/contentdetails/:id",getcontentbyid);
 general_routers.get("/last4contentaccseptfirst",last4contentaccseptfirst)
 general_routers.get("/lastcontent",lastcontent);

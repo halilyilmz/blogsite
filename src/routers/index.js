@@ -6,6 +6,7 @@ import admin_routers from "./admin.js";
 
 
 allrouters.use("/admin", admin_routers);
-allrouters.use("/homepage",general_routers);
+allrouters.use("/",general_routers);
+
 
 export default allrouters;

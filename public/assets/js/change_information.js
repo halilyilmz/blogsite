@@ -63,23 +63,7 @@ console.log(data)
 });
 
 addcontentbutton.addEventListener("click",async function(e){
-  let response=await fetch(`http://localhost:8000/admin/addcontentpage`, {
-    method: "GET",
-    headers: {
-      "Authorization": `Bearer ${localtoken}`,
-      "Content-Type": "application/json"
-    }
-  }).then(response => {
-    if (response.redirected) { 
-      // Tarayıcının yönlendirmesi için
-      window.location.href = response.url;
-    }
-    return response.text(); // Yanıtın içeriğini al
-  })
-  .then(data => {
-    console.log("Gelen veri:", data);
-  })
-  .catch(error => console.error("Hata:", error));
+      window.location.href = "http://localhost:8000/admin/add_content_page";
 })
 
 
@@ -234,7 +218,7 @@ function checkifmaxpage2(){
 
 async function getMaxPage() {
     try {
-      const response = await fetch('http://localhost:8000/homepage/maxpage');
+      const response = await fetch('http://localhost:8000/maxpage');
   
       if (!response.ok) {
         throw new Error('HTTP hatası! status: ' + response.status);
@@ -268,35 +252,35 @@ async function getMaxPage() {
   function setcontenttofrontend(data){
 
     content1_note.innerText=data[0].note;
-    let imgpath1="http://localhost:8000/"+ data[0].image_path;
+    let imgpath1="http://localhost:8000/public/"+ data[0].image_path;
     content1_img.src=imgpath1;
     content1_h1.innerText=data[0].title;
     content1_explanation1.innerText=data[0].content_text;
-    content1_button.href=`http://localhost:8000/views/change_detail/change_detail.html?id=${data[0].content_id}`
+    content1_button.href=`http://localhost:8000/admin/change_detail?id=${data[0].content_id}`
 
     if(data[1]){
       content2_note.innerText=data[1].note;
-      let imgpath2="http://localhost:8000/"+ data[1].image_path;
+      let imgpath2="http://localhost:8000/public/"+ data[1].image_path;
       content2_img.src=imgpath2;
       content2_h1.innerText=data[1].title;
       content2_explanation1.innerText=data[1].content_text;
-      content2_button.href=`http://localhost:8000/views/change_detail/change_detail.html?id=${data[1].content_id}`
+      content2_button.href=`http://localhost:8000/admin/change_detail?id=${data[1].content_id}`
     }
     if(data[2]){
       content3_note.innerText=data[2].note;
-      let imgpath3="http://localhost:8000/"+ data[2].image_path;
+      let imgpath3="http://localhost:8000/public/"+ data[2].image_path;
       content3_img.src=imgpath3;
       content3_h1.innerText=data[2].title;
       content3_explanation1.innerText=data[2].content_text;
-      content3_button.href=`http://localhost:8000/views/change_detail/change_detail.html?id=${data[2].content_id}`
+      content3_button.href=`http://localhost:8000/admin/change_detail?id=${data[2].content_id}`
     }
     if(data[3]){
       content4_note.innerText=data[3].note;
-      let imgpath4="http://localhost:8000/"+ data[3].image_path;
+      let imgpath4="http://localhost:8000/public/"+ data[3].image_path;
       content4_img.src=imgpath4;
       content4_h1.innerText=data[3].title;
       content4_explanation1.innerText=data[3].content_text;
-      content4_button.href=`http://localhost:8000/views/change_detail/change_detail.html?id=${data[3].content_id}`
+      content4_button.href=`http://localhost:8000/admin/change_detail?id=${data[3].content_id}`
     }
     
   }

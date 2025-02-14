@@ -4,6 +4,16 @@ import allrouters from "./src/routers/index.js";
 import dotenv from "dotenv";
 import authRoutes from "./src/routers/auth.js";
 import verifyAdmin from "./src/middleware/authMiddleware.js";
+import ejs from "ejs";
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const srcPath= path.dirname(path.dirname(__dirname));
+
 
 const app = express();
 dotenv.config();
@@ -14,8 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Views
+app.set('view engine', 'ejs');
 app.set("views","./src/views");
-app.use(express.static("public"));
+app.use("/public", express.static(path.join(__dirname, "public"), { extensions: ["css","js","png","PNG","jpg","JPG"] }));
 
 // Router
 app.use("/", allrouters)
