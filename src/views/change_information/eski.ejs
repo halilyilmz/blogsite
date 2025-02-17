@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../public/assets/css/change_information.css">
+</head>
+<body>
+    <div class="content">
+        
+        <div class="content_left">
+
+            <div class="main_contents addcontent">
+                <a href="http://localhost:8000/admin/add_content_page"> 
+                    <button name="add" id="add" class="addcontentbutton">add blog</button> 
+                </a>
+            </div>
+
+            <% records.forEach(data => { %>
+                <div class="main_contents content1">
+                    <div class="main_contents_inside">
+                        <div class="main_contents_inside_img">
+                            <img class="main_contents_inside_img_img img1" src="http://localhost:8000/public/<%= data.image_path %>" alt="">
+                        </div>
+    
+                        <div class="content_inside_text">
+                            <span class="note note1"><%= data.note %></span>
+                            <h3 class="content_h1 h11"><%= data.title %></h3>
+                            <span class="content_inside_explanation explanation1"><%= data.content_text %></span>
+                            <button >
+                                <a href="http://localhost:8000/admin/change_detail?id=<%= data.content_id %>" class="content1_update">update</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+
+            <div class="pagination"></div>
+
+        </div>
+    </div>
+
+    <div class="pagination">
+        <% if (id > 1) { %>
+            <a href="http://localhost:8000/admin/change_information/<%= beforelink(id) %>">
+                <button class="before" id="before">before</button>
+            </a>
+        <% } else { %>
+            <button class="before" id="before" disabled>before</button>
+        <% } %>
+    
+        <span class="pagination_segment nonbutton" <% if (chosenpagination == 1) { %>id="chosenpagination"<% } %>>
+            <%= pagination.pagination1 %>
+        </span>
+        <span class="pagination_segment nonbutton" <% if (chosenpagination == 2) { %>id="chosenpagination"<% } %>>
+            <%= pagination.pagination2 %>
+        </span>
+        
+        <% if (pagination.paginationdots) { %>
+            <span class="pagination_segment nonbutton"><%= pagination.paginationdots %></span>
+        <% } %>
+    
+        <span class="pagination_segment nonbutton" <% if (chosenpagination == 3) { %>id="chosenpagination"<% } %>>
+            <%= pagination.paginationmax %>
+        </span>
+    
+        <% if (id < pagination.paginationmax) { %>
+            <a href="http://localhost:8000/admin/change_information/<%= afterlink(id) %>">
+                <button class="after" id="after">after</button>
+            </a>
+        <% } else { %>
+            <button class="after" id="after" disabled>after</button>
+        <% } %>
+    </div>
+    
+    <% function beforelink(id) { 
+        if (id > 1) {
+            return id - 1;
+        } 
+        return id;
+    } %>
+    
+    <% function afterlink(id) { 
+        if (id < pagination.paginationmax) {
+            return id + 1;
+        } 
+        return id;
+    } %>
+    

@@ -86,3 +86,7 @@
     border: 0.5px solid rgba(49, 49, 49, 0.686) ;
     border-radius: 1px;
 }
+#chosenpagination{
+    background-color: darkgrey;
+    color: white;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../public/assets/css/detailpage.css">
+</head>
+<body>
+    <div class="header">
+
+        <div id="logo">
+            <span id="vanguard">VANGUARD</span> 
+            <span id="dermatology">DERMATOLOGY</span>
+        </div>
+
+        <div class="buttons home_page">Home Page</div>
+        <div class="buttons about_us">About Us</div>
+        <div class="buttons contact_us">Contact Us</div>
+    </div>
+
+    <div class="top">
+        <div class="v_logo">V</div>
+        <div class="top_img">
+            <img src="http://localhost:8000/public/<%=wantedcontent.image_path%>" alt="" class="top_img_img ">
+        </div>
+        
+        
+        <div class="right_wrapper">
+            <div class="right">
+                <div class="note top_content_note">ANTI AGING</div>
+
+                <div class="content_title_wrapper">
+                    <div class="content_title content_top_title"><%= wantedcontent.note %></div>
+                </div>
+                
+                <div class="content_mini content_top_text"><%= wantedcontent.content_text %></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tops_bottom_color"></div>
+
+    <div class="content">
+        <div class="note" id="note_content"><%= wantedcontent.note %></div>        
+        <h1 class="content_title content_main_title"><%= wantedcontent.title %></h1>
+        <p class="content_text text1"></p>
+
+        <div class="bordered_text contentinsidetitle"><p><%= wantedcontent.content_inside_title %></p>
+            <br> <a href="https://www.facebook.com/" id="share_a"> <span id="facebook">f</span>  <span class="note share">share</span></a>
+        </div>
+
+    </div>
+
+    <div class="read_more">
+        <p class="read_more_title note share"> READ MORE</p>
+        <p class="read_more_segment note share">DREAM NEWS</p>
+        <p class="read_more_segment note share">ANTI-AGING</p>
+        <p class="read_more_segment note share">HAIR</p>
+        <p class="read_more_segment note share">LıFESTYLE</p>
+    </div>
+
+    <%- include("../layouts/footer.ejs") %>
+
+    <script src="../../../public/assets/js/detail_page.js"></script>
+</body>
+</html>
