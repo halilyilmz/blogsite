@@ -1,11 +1,10 @@
 import { where } from "sequelize";
 import  db  from "../models/index.js";
 import fs from 'fs';
-
+import bcrypt from "bcrypt";
 
 export const addcontent = async (req, res) => {
     try {
-        console.log(req.body)
         // İçerik için tag belirleme
         let tagforadding;
 
@@ -26,7 +25,7 @@ export const addcontent = async (req, res) => {
 
         let image_path_cropped= filePath.substring(14,filePath.length);
         image_path_cropped="images/"+image_path_cropped;
-        console.log(image_path_cropped);
+
 
         // İçeriği veritabanına kaydet
         const newContent = await db.content.create({
@@ -54,7 +53,7 @@ export const addcontent = async (req, res) => {
 export const update = async (req, res) => {
     try {
 
-        console.log(req.body)
+
         // İçerik için tag belirleme
         let tagforadding;
 
@@ -71,7 +70,6 @@ export const update = async (req, res) => {
 
         // İçeriği veritabanına kaydet
 
-        console.log(req.body.note)
         await db.content.update(
             { 
                 note: req.body.note,
@@ -91,4 +89,26 @@ export const update = async (req, res) => {
     }
 };
 
+export const setLoginSession = async (req, res) => {
+    try{
 
+        const admin = await db.admin.findOne({
+            where:{
+                admin_name:req.body.admin_name
+            }
+        });
+        let comparedpassword=await bcrypt.compare(req.body.admin_password,admin.admin_password)
+
+        if(comparedpassword){
+            req.session.user={ id:admin.id ,admin_name:admin.admin_name}
+            res.redirect('/admin/change_information/1')
+        }
+        else{
+            res.status(500).json("wrong username or password 1")
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json("wrong username or password 2")
+    }
+}

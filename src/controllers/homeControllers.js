@@ -1,5 +1,6 @@
 
 import  db  from "../models/index.js";
+import { Sequelize } from "sequelize";
 
 export const index=async (req, res) => {
     try {
@@ -13,8 +14,7 @@ export const index=async (req, res) => {
                 order: [['content_id', 'DESC']], // created_at'ı azalan düzende sırala
                 limit: 4, // Son 4 veriyi getir
                 where:{
-                    tag_id:1,
-                    tag_id:2
+                    tag_id:{ [Sequelize.Op.or]: [1, 2] } 
                 }
               });
         //lastfourmustreadcontent
@@ -23,7 +23,6 @@ export const index=async (req, res) => {
                     limit:4,
                     where:{tag_id:3}
                 });
-        console.log(lastfourmustreadcontent)
 
         return res.render("homepage/homepage",{topcontent:lastcontent,lastfourcontentaccseptfirst:lastfourcontentaccseptfirst,rightfourcontent:lastfourmustreadcontent})
     } catch (error) {

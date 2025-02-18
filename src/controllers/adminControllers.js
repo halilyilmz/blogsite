@@ -1,7 +1,9 @@
+import { where } from "sequelize";
 import  db  from "../models/index.js";
 
 export const index= (req,res)=>{
-    return res.render("admin_enter/admin_enter",records)
+
+    return res.render("admin_enter/admin_enter")
 }
 
 export const changeinformation = async (req, res) => {
@@ -17,7 +19,7 @@ export const changeinformation = async (req, res) => {
             order: [['content_id', 'DESC']], 
         });
         
-        console.log(records); 
+
 
         //gets pagination segments as pagination array
         let pagination={};
@@ -46,12 +48,14 @@ export const changeinformation = async (req, res) => {
             if(id<pagination.paginationmax-3){
                 pagination.paginationdots="...";
             }
-            pagination.pagination1=1;
-            pagination.pagination2=2;
+            pagination.pagination1=id-1;
+            pagination.pagination2=id;
             chosenpagination=2;
         }
         if(id==pagination.paginationmax){
             chosenpagination=3;
+            pagination.pagination1=id-2;
+            pagination.pagination2=id-1;
         }
         
         return res.render("change_information/eski", { records: records, pagination: pagination, chosenpagination: chosenpagination,id:id });
@@ -73,3 +77,4 @@ export const changedetail=async (req,res)=>{
 export const addcontentpage=(req,res)=>{
     return res.render("add_content/add_content")
 }
+
